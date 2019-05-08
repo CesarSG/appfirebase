@@ -19,7 +19,7 @@ export default class Login extends Component {
     });
 
     this.options = {
-      fileds: {
+      fields: {
         email: {
           help: 'Introduce tu email',
           error: 'Email incorrecto',
@@ -36,7 +36,23 @@ export default class Login extends Component {
   }
 
   login () {
+      const validate = this.refs.form.getValue();
+      if (validate){
+          firebase.auth().signInWithEmailAndPassword(validate.emial, validate.password)
+            .then(() => {
+                Toast.showWithGravity("Bienvenido", Toast.LONG, Toast.BOTTOM);
+            })
+            .catch(() => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                if (errorCode === 'auth/wrong-password'){
+                  Toast.showWithGravity("La contraseña es incorrecta", Toast.LONG, Toast.BOTTOM);
+                } else {
+                  Toast.showWithGravity(errorMessage, Toast.LONG, Toast.BOTTOM);
+                }
 
+            })
+      }
   }
 
   render() {
