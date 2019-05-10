@@ -3,7 +3,7 @@ import {View, StyleSheet} from 'react-native';
 import AppButton from "../../aplication/components/AppButton";
 
 
-export default class RestauranteAddButton extends Component {
+export default class RestaurantAddButton extends Component {
   render() {
     const {addRestaurant} = this.props;
     return (

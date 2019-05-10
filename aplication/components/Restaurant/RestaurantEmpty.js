@@ -6,8 +6,8 @@ export default class RestaurantEmpty extends Component{
     const {text} = this.props;
 
     return(
-      <View style={styles.restauranteEmptyView}>
-        <Text style={styles.restauranteEmptyText}>
+      <View style={styles.restaurantEmptyView}>
+        <Text style={styles.restaurantEmptyText}>
           {text}
         </Text>
       </View>
@@ -17,13 +17,13 @@ export default class RestaurantEmpty extends Component{
 }
 
 const styles = StyleSheet.create({
-  restauranteEmptyView: {
+  restaurantEmptyView: {
     justifyContent: 'center',
     flex: 1,
     marginTop: 10,
     marginBottom: 10
   },
-  restauranteEmptyText: {
+  restaurantEmptyText: {
     backgroundColor: 'rgba(161,6,10,0.8)',
     color: 'white',
     textAlign: 'center',
