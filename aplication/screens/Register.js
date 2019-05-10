@@ -58,15 +58,48 @@ export default class Register extends Component {
 
   register () {
     if(this.validate){
-
+        firebase.auth().createUserWithEmailAnsPassword(
+          this.validate.email, this.validate.password
+        )
+           .then(() => {
+             Toast.showWithGravity("Registro correcto, Bienvenido!", Toast.LONG, Toast.BOTTOM);
+           })
+           .catch(error => {
+             Toast.showWithGravity(error.message, Toast.LONG, Toast.BOTTOM);
+           })
     }
   }
 
   onChange (user){
+    this.setState({user});
+    this.validate = this.refs.form.getValue();
 
   }
 
   render(){
+    return (
+      <BackgroundImage source={require('../../assets/images/bg-image.jpg')}>
+        <View>
+          <Card wrapperStyle={{padding: 10}} title="Registrate">
+            <Form
+              ref="form"
+              type={this.user}
+              options={this.options}
+              onChange={(v) => this.onChange(v)}
+              value={this.state.user}
+            />
+            <AppButton
+              bgColor="rgba(66, 66, 66, 0.9)"
+              title="Registrarme  "
+              action={this.register.bind(this)}
+              iconName="user-plus"
+              iconSize={30}
+              iconColor="#fff"
+            />
+          </Card>
+        </View>
+      </BackgroundImage>
+    )
 
   }
 }

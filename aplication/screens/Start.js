@@ -19,7 +19,10 @@ export default class Start extends Component {
   }
 
   register(){
-
+    const navigateAction = NavigationActions.navigate({
+      routeName: 'Register'
+    });
+    this.props.navigation.dispatch(navigateAction)
   }
 
   async facebook(){
