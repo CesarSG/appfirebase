@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {View, StyleSheet} from 'react-native';
-import AppButton from "../../aplication/components/AppButton";
+import AppButton from "../AppButton";
 
 
 export default class RestaurantAddButton extends Component {

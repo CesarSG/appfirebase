@@ -1,12 +1,15 @@
 import React from 'react';
 import {Text} from 'react-native-elements';
 import GuestNavigation from "./aplication/navigations/guest";
+import LoggedNavigation from "./aplication/navigations/logged";
 import PreLoader from "./aplication/components/PreLoader";
 import RestaurantEmpty from "./aplication/components/Restaurant/RestaurantEmpty";
 
 import firebaseConfig from './aplication/utils/firebase';
 import * as firebase from 'firebase';
 firebase.initializeApp(firebaseConfig);
+
+console.disableYellowBox = true;
 
 export default class App extends React.Component {
 
@@ -26,7 +29,7 @@ export default class App extends React.Component {
           loaded: true
         });
       } else {
-        his.setState({
+        this.setState({
           isLogged: false,
           loaded: true
         });
@@ -41,7 +44,7 @@ export default class App extends React.Component {
       return (<PreLoader/>);
     }
     if(isLogged){
-      return (<RestaurantEmpty text="No hay restaurantes disponibles"/>);
+      return (<LoggedNavigation/>);
     } else {
       return (<GuestNavigation/>);
     }

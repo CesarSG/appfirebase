@@ -15,17 +15,10 @@ export default class Restaurants extends Component {
     this.state = {
       restaurants: [],
       loaded: false,
-      restaurant_logo: require('../../../assets/images/bg-imagess.jpg')
+      restaurant_logo: require('../../../assets/images/bg-image.jpg')
     };
 
     this.refRestaurants = firebase.database().ref().child('restaurants');
-  }
-
-  addRestaurant (){
-    const navigateAction =  NavigationActions.navigate({
-      routeName: 'AddRestaurant'
-    });
-    this.props.navigation.dispatch(navigateAction);
   }
 
   componentDidMount (){
@@ -48,6 +41,13 @@ export default class Restaurants extends Component {
     })
   }
 
+  addRestaurant (){
+    const navigateAction =  NavigationActions.navigate({
+      routeName: 'AddRestaurant'
+    });
+    this.props.navigation.dispatch(navigateAction);
+  }
+
   resturantDetail (restaurant) {
 
   }
@@ -59,7 +59,7 @@ export default class Restaurants extends Component {
         containerStyle={styles.item}
         titleStyle={styles.title}
         roundAvatar
-        title={`${restaurant.name} (Capcidad: ${restaurant.capacity})`}
+        title={`${restaurant.name} (Capacidad: ${restaurant.capacity})`}
         avatar={this.state.restaurant_logo}
         onPress={() => this.resturantDetail(restaurant)}
         rightIcon={{ name: 'arrow-right', type: 'font-awesome', style: styles.listIconStyle}}
@@ -72,12 +72,12 @@ export default class Restaurants extends Component {
     const {loaded, restaurants} = this.state;
 
     if(!loaded){
-      return (<PreLoader/>)
-    }
+      return <PreLoader/>
+    };
 
-    if(!restaurant.length) {
+    if(!restaurants.length) {
       return (
-        <BackgroundImage source={require('../../assets/images/bg-images.jpg')}>
+        <BackgroundImage source={require('../../../assets/images/bg-image.jpg')}>
           <RestaurantEmpty text="No hay restaurantes disponibles"/>
           <RestaurantAddButton addRestaurant={this.addRestaurant.bind(this)}/>
         </BackgroundImage>
@@ -85,9 +85,9 @@ export default class Restaurants extends Component {
     }
 
     return (
-      <BackgroundImage source={require('../../assets/images/bg-images.jpg')}>
+      <BackgroundImage source={require('../../../assets/images/bg-image.jpg')}>
         <FlatList
-          data={restaurant}
+          data={restaurants}
           renderItem={(data) => this.renderRestaurant(data.item)}
         />
         <RestaurantAddButton addRestaurant={this.addRestaurant.bind(this)}/>
